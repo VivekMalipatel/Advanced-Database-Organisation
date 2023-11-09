@@ -1,0 +1,101 @@
+Assignment 3 - Record Manager
+
+TEAM MEMBERS (GROUP 3)
+
+Vivekanand Reddy Malipatel - A20524971
+Indrajit Ghosh - A20525793
+Sai Ram Oduri - A20522183
+
+***********************************************************************************************************************************
+
+Note ---->
+The test_assign3_1.c has been modified to satisfy the Primary Key implementation and the initial memory leak.
+
+Optional Functions Implemented ----->
+
+1. TID and Tombstone : We are using + and - Symbols for tombstone functionality while inserting and deleting the records.
+2. Primary Key : checkPrimaryKey() Functions retirves all the records in the table and checks for the primary key violation and trhows RC_PRIMARYKEY_VIOLATION, if found.
+
+***********************************************************************************************************************************
+
+Description----->
+
+The record manager handles tables with a fixed schema. Clients can insert records, delete records, update records, and scan through the records in a table. 
+A scan is associated with a search condition and only returns records that match the search condition. 
+Each table should be stored in a separate page file and your record manager should access the pages of the file through the buffer manager implemented in the last assignment.
+
+Script Execution---->
+
+1. Go to the terminal inside the project folder
+2. use "make clean" to clear the auto generated files.
+3. use "make" command to compile the file
+4. use "make run" to run the test case test_assign3_1.c
+5. use "make run1" to run the test case test_expr.c
+5. use Step - 2 again before running the another testcase.
+
+-----------------------------------------------------------------------------------------------------------------------------
+Implemented by Indrajit Ghosh
+
+Function Implementations -
+
+initRecordManager()--> This function is used to initialize the recordmanager which internally calls the storage manager.
+
+shutdownRecordManager()--> This function is used to shut down the Record Manager and free all the memory used by it.
+
+createTable()-->  This function creates a table , with the name, schema given as argument. It checks whether the schema is too big in size or 
+the record size is too big for a reference page size.
+
+openTable()-->This function opens a table with the given name and sets its metadata to a custom record Manager metadata.
+
+closeTable()-->This function is used to close the opened table, shutdown the bufferpool and set the table metadata to Null
+
+deleteTable()--> This method will be used to delete the page file from the disk associated with the table name.
+
+getNumTuples()--> This method will be used to get the number of tuples in the table whose content can be found using the metadata.
+
+Test case for Primary keys - testPrimaryKey()-->This function has been implemented in test_assign3_1.c, which validates that the primary key logic , which
+get activate only when activatePkeyTag() is called.
+-----------------------------------------------------------------------------------------------------------------------------
+Implemented by Vivekanand Reddy Malipatel
+
+Function Implementations -
+
+checkPrimaryKey() ----> This function checks the primary key functionality.
+
+insertRecord() ---> This function is used to insert tuples to the table from the record. It Initially finds for the free page and copies the records into the table using memcpy() method.
+
+deleteRecord() ----> This function deletes the tuples from the table.
+
+updateRecord() -----> This function updates the tuples from the table.
+
+getRecord() -------> Thsi function retrieves the record with the given RID.
+
+startScan() --------> This Function Initialises the Scan manager with the given TableData, Scan conditiona and Handler.
+
+next() ---> This Function scans the tuples in the table with the given scan condition and return "RC_RM_NO_MORE_TUPLES" if it reaches end of the table.
+
+closeScan() -----> This function closes the scan manager and free the Scanmanager memory.
+
+-----------------------------------------------------------------------------------------------------------------------------
+Implemented by Sai Ram Oduri
+
+Function Implementations -
+
+getRecordSize()---> GetRecordSize function calculates the actual size of the schema on the disk by taking each bytes' size and adding them up
+
+createSchema()---> to create a new schema build a blueprint of the schema, including the attributes required.This function helps to build a new schema.
+
+freeSchema()--->  Free Schema is to delete Schema and the variables completely with all the memory it has occupied
+createRecord()---> Build a record in the schema, referring to "schema"
+bytes_offsetting()--->This function is taken from the Record manager serializer , to calculate position of the pointer from the previously passed location.
+This will set the attributes on the disk in a serial fashion
+
+freeRecord()--->We need to freeRecord from the memory.
+getAttr()---> Get Attr function takes,Record with all the data,Schema with all the data in the schema,Attribute Numbers to retrieve the attributes in the schema
+Value of the expression.
+
+setAttr()--->Set Attr function takes,Record with all the data,Schema with all the data in the schema,Attribute Numbers to set the attributes in the schema
+Value of the expression.
+
+
+

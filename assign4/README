@@ -1,0 +1,86 @@
+Assignment 4 - B+Tree
+
+TEAM MEMBERS (GROUP 3)
+
+Vivekanand Reddy Malipatel - A20524971
+Indrajit Ghosh - A20525793
+Sai Ram Oduri - A20522183
+
+***********************************************************************************************************************************
+
+Optional Functions Implemented ----->
+
+We have added support for multiple datatypes as keys
+
+***********************************************************************************************************************************
+
+Description----->
+
+
+Script Execution---->
+
+1. Go to the terminal inside the project folder
+2. use "make clean" to clear the auto generated files.
+3. use "make" command to compile the file
+4. use "make run" to run the test case test_assign4_1.c
+5. use "make run1" to run the test case test_expr.c
+6. use Step - 2 again before running the another testcase.
+
+-----------------------------------------------------------------------------------------------------------------------------
+Implemented by Indrajit Ghosh
+
+Function Implementations -
+
+initIndexManager(): This function initializes the Index Manager by calling the initStorageManager function from the Storage Manager.
+It returns RC_OK if initialization is successful.
+
+shutdownIndexManager(): This function deallocates the memory for the B+ Tree metadata structure and its buffer pool, which were created 
+during the initialization process. It returns RC_OK if deallocation is successful.
+
+intializeTreeManager(): This function initializes the B+ Tree metadata structure with the given order, number of nodes, number of entries,
+root node, first node in the queue for printing, and key data type. It also allocates memory for the Buffer Manager and stores it in the 
+B+ Tree metadata structure.
+
+createBtree(): This function creates a new B+ Tree with the specified order, data type of keys, and page size. It initializes the tree manager 
+and creates a new page file for the B+ Tree. It then writes the root node of the B+ Tree to the page file and closes the file.
+
+openBtree(): This function opens an existing B+ Tree from the specified page file. It retrieves the B+ Tree handle and assigns our metadata 
+structure to it. It initializes a Buffer Pool using Buffer Manager and returns RC_OK if successful.
+
+closeBtree(): This function closes an open B+ Tree by marking the page as dirty, terminating the buffer pool, and deallocating the B+ Tree 
+metadata structure. It returns RC_OK if successful.
+
+deleteBtree(): This function deletes an existing B+ Tree by destroying the page file associated with it. It returns RC_OK if successful.
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+Implemented by Vivekanand Reddy Malipatel
+
+Function Implementations -
+
+findKey() : Used to find the location of the key in the Btree
+
+insertKey() : used to Insert the key into the Btree
+
+deleteKey() : used to delete the key into the Btree
+
+openTreeScan() : used to initialise the scan function to scan the Btree
+
+nextEntry() : Used to traverse throught be Btree in the scan functions and returns RC_IM_NO_MORE_ENTRIES is the parsing reaches the end of the Btree
+
+closeTreeScan() : used to destroy and close the scanm handlers
+
+-----------------------------------------------------------------------------------------------------------------------------
+Implemented by Sai Ram Oduri
+
+Function Implementations -
+
+minCompare() -- Tests the comparision if the keys are smaller
+maxCompare() -- Tests the comparision if the key1 is bigger 
+equality() --- Tests the function if the keys are equal
+printTree() -- Prints the whole Index Manager
+getNumNodes(BTreeHandle *tree, int *entries) ---  To get all the nodes in B+Tree, use Tree Management data from Btree Handle
+
+getNumEntries(BTreeHandle *tree, int *keys) ---To get the number of keys,B+Tree, use Tree Management data from Btree Handle
+
+getKeyType(BTreeHandle *tree, DataType *keytype) --- To retrieve all the record's datatype in B+Tree,B+Tree, use Tree Management data from Btree Handle
